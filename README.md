@@ -1,32 +1,45 @@
-# React + TypeScript + Vite
+# Explorer App (React)
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Interfaz adaptable para explorar países, construida con React, TypeScript, Vite y Tailwind CSS v4. Usa datos de demostración (sin API) y organiza los componentes con Atomic Design.
 
-Currently, two official plugins are available:
+## Requisitos
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Node.js 20.19 o superior
+- pnpm
 
-## React Compiler
+## Ejecutar el proyecto
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```bash
+pnpm install
+pnpm dev        # http://localhost:5173
+pnpm build      # compilación de producción
+pnpm preview    # sirve la compilación
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+## Organización (Atomic Design)
+
+```
+src/
+├── components/
+│   ├── atoms/        Heading, Input, Select, FlagImage, IconButton, NavLink, InfoRow
+│   ├── molecules/    SearchField, RegionSelect, CountryCard, NavLinks, EmptyMessage
+│   ├── organisms/    Header, FiltersBar, CountryGrid
+│   └── templates/    ExplorerTemplate
+├── data/             Países de demostración y regiones
+├── types/            Interfaces y tipos
+├── utils/            Filtrado y formateo
+├── App.tsx           Estado compartido y composición
+└── index.css         Design tokens con @theme
+```
+
+## Estado y comunicación
+
+El estado (`search`, `region`, `isMenuOpen`) vive en `App.tsx`. Cada componente hijo recibe el valor por props y avisa los cambios con callbacks tipados (`onSearchChange`, `onRegionChange`, `onToggleMenu`, `onCloseMenu`). La lista visible se calcula a partir de ese estado.
+
+## Funcionalidades
+
+- Tarjetas con bandera, nombre, capital, región y población (4 por fila desde 1024 px, 2 en tablet y 1 en móvil)
+- Búsqueda por nombre (sin distinguir mayúsculas ni acentos) que se actualiza al escribir
+- Filtro por región combinado con la búsqueda
+- Mensaje cuando no hay resultados
+- Menú de navegación adaptable: horizontal en escritorio y desplegable en móvil (se cierra con Escape o al elegir un enlace)
