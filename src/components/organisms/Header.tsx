@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { IconButton } from '../atoms/IconButton'
 import { NavLinks } from '../molecules/NavLinks'
 
@@ -24,9 +25,9 @@ export function Header({ isMenuOpen, onToggleMenu, onCloseMenu }: HeaderProps) {
   return (
     <header className="relative border-b border-bronce/20">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 tablet:px-8">
-        <a href="#inicio" className="font-heading text-xl font-bold text-papel">
+        <Link to="/" className="font-heading text-xl font-bold text-papel">
           Explorer
-        </a>
+        </Link>
 
         <nav aria-label="Principal" className="hidden tablet:block">
           <NavLinks orientation="horizontal" />

@@ -3,17 +3,23 @@ import { Heading } from '../atoms/Heading'
 
 interface ExplorerTemplateProps {
   header: ReactNode
-  filters: ReactNode
+  filters?: ReactNode
+  title?: string
   children: ReactNode
 }
 
-export function ExplorerTemplate({ header, filters, children }: ExplorerTemplateProps) {
+export function ExplorerTemplate({
+  header,
+  filters,
+  title = 'Explorer',
+  children,
+}: ExplorerTemplateProps) {
   return (
     <div id="inicio" className="min-h-screen">
       {header}
       <main className="mx-auto max-w-7xl px-6 py-10 tablet:px-8">
         <Heading level={1} className="mb-6">
-          Explorer
+          {title}
         </Heading>
         {filters}
         <section id="paises" aria-label="Países" className="scroll-mt-4">
