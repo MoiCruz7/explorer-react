@@ -8,9 +8,9 @@ interface NavLinksProps {
 }
 
 const NAV_ITEMS = [
-  { href: '#inicio', label: 'Inicio' },
-  { href: '#buscar', label: 'Buscar' },
-  { href: '#paises', label: 'Países' },
+  { href: '/#inicio', label: 'Inicio' },
+  { href: '/#buscar', label: 'Buscar' },
+  { href: '/#paises', label: 'Países' },
 ]
 
 const LIST_STYLES: Record<NavOrientation, string> = {
